@@ -1,0 +1,29 @@
+---
+version: "3.5"
+
+services:
+  # db:
+  #   container_name: mariadb
+  #   image: ${MARIADB_IMAGE:-mariadb:10.4}
+  #   restart: always
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=rootpassword
+  #     - MYSQL_USER=limesurveyuser
+  #     - MYSQL_PASSWORD=limesurveypassword
+  #     - MYSQL_DATABASE=limesurvey
+  #   volumes:
+  #     - mariadb:/var/lib/mysql
+
+  lime:
+    container_name: lime
+    image: lime:dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - limesurvey:/var/www/app/upload
+
+volumes:
+  limesurvey:
+    driver: local
+  # mariadb:
+  #   driver: local

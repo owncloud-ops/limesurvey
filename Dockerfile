@@ -25,9 +25,9 @@ RUN apk --update add --virtual .build-deps tar curl composer && \
     curl -SsL "https://download.limesurvey.org/latest-stable-release/limesurvey4.3.0+200616.tar.gz" | \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
     curl -SsL -o /etc/php7/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
-    composer -q install --working-dir=/var/www/app --no-dev --optimize-autoloader && \
-    composer -q require --working-dir=/var/www/app laminas/laminas-ldap && \
-    composer -q clearcache && \
+    mkdir -p /var/www/app/upload/surveys && \
+	  mkdir -p /var/www/app/uploadstruct && \
+    cp -a /var/www/app/upload/* /var/www/app/uploadstruct && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \

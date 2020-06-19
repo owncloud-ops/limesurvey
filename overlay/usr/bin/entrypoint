@@ -6,7 +6,7 @@ set -eo pipefail
 
 printf "\nPrepare survey ..."
 
-printf "\nStarting SURVEY ...\n"
+printf "\nStarting survey ...\n"
 
 php-fpm7 -F &
 exec nginx -g "daemon off;"
