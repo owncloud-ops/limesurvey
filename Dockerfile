@@ -22,7 +22,7 @@ RUN apk --update add --virtual .build-deps tar curl composer && \
     mkdir -p /var/www/app/ && \
     SURVEY_VERSION="${SURVEY_VERSION##v}" && \
     echo "Installing limesurvey..." && \
-    curl -SsL "https://download.limesurvey.org/latest-stable-release/limesurvey${BUILD_VERSION}.tar.gz" | \
+    curl -SsL "https://download.limesurvey.org/latest-stable-release/limesurvey4.3.0+200616.tar.gz" | \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
     curl -SsL -o /etc/php7/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
     composer -q install --working-dir=/var/www/app --no-dev --optimize-autoloader && \
