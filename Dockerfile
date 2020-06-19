@@ -16,7 +16,7 @@ ADD overlay/ /
 RUN apk --update add --virtual .build-deps tar curl composer && \
     apk --update add php7 php7-curl php7-fpm php7-gd php7-intl php7-zip php7-xml php7-simplexml php7-xmlreader php7-xmlwriter \
     php7-dom php7-ctype php7-fileinfo php7-tokenizer php7-session php7-ldap php7-json php7-iconv php7-pdo_sqlite php7-pdo_mysql \
-    php7-xsl php7-mbstring gnu-libiconv && \
+    php7-xsl php7-mbstring php7-imap php7-sodium gnu-libiconv && \
     rm -rf /var/www/localhost && \
     rm -f /etc/php7/php-fpm.d/www.conf && \
     mkdir -p /var/www/app/ && \

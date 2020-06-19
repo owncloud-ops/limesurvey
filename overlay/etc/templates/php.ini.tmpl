@@ -45,7 +45,7 @@ max_execution_time = {{ getenv "PHP_MAX_EXECUTION_TIME" "30" }}
 max_input_time = {{ getenv "PHP_MAX_INPUT_TIME" "60" }}
 ;max_input_nesting_level = 64
 max_input_vars = 100
-memory_limit = {{ getenv "PHP_MEMORY_LIMIT" "100M" }}
+memory_limit = {{ getenv "PHP_MEMORY_LIMIT" "128M" }}
 
 error_reporting = {{ getenv "PHP_ERROR_REPORTING" "E_ALL & ~E_DEPRECATED & ~E_STRICT" }}
 display_errors = {{ getenv "PHP_DISPLAY_ERRORS" "Off" }}
