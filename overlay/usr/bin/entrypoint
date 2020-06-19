@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+set -eo pipefail
+
+/usr/local/bin/gomplate -V -o /etc/php7/php.ini -f /etc/templates/php.ini.tmpl
+
+printf "\nPrepare survey ..."
+
+printf "\nStarting SURVEY ...\n"
+
+php-fpm7 -F &
+exec nginx -g "daemon off;"
+
+
