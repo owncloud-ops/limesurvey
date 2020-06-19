@@ -21,12 +21,12 @@ RUN apk --update add --virtual .build-deps tar curl composer && \
     rm -f /etc/php7/php-fpm.d/www.conf && \
     mkdir -p /var/www/app/ && \
     SURVEY_VERSION="${SURVEY_VERSION##v}" && \
-    echo "Installing limesurvey..." && \
-    curl -SsL "https://download.limesurvey.org/latest-stable-release/limesurvey4.3.0+200616.tar.gz" | \
+    echo "Installing limesurvey version '${SURVEY_VERSION}' ..." && \
+    curl -SsL "https://download.limesurvey.org/latest-stable-release/limesurvey${SURVEY_VERSION}.tar.gz" | \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
     curl -SsL -o /etc/php7/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
     mkdir -p /var/www/app/upload/surveys && \
-	  mkdir -p /var/www/app/uploadstruct && \
+    mkdir -p /var/www/app/uploadstruct && \
     cp -a /var/www/app/upload/* /var/www/app/uploadstruct && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/* && \
