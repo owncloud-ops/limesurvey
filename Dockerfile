@@ -41,7 +41,8 @@ RUN apk --update add --virtual .build-deps tar curl composer && \
     chown nginx /etc/php7/php.ini && \
     chown -R nginx:nginx /var/www/app
 
-VOLUME /var/www/app/var
+VOLUME /var/www/app/upload
+VOLUME /var/www/app/plugins
 
 EXPOSE 8080
 
