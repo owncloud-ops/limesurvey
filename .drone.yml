@@ -28,7 +28,7 @@ steps:
   commands:
   - export BASE=${DRONE_TAG:-latest}
   - export TAG=$${BASE##v}
-  - export TAG=${TAG//+/_}
+  - export TAG=${TAG//+/-}
   - if [ "$$TAG" == "latest" ]; then echo -n "latest" > .tags; else echo -n "latest,$${TAG},$${TAG%-*},$${TAG%.*},$${TAG%%.*}" > .tags; fi
 
 - name: publish
