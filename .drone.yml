@@ -28,9 +28,10 @@ steps:
   commands:
   - export BASE=${DRONE_TAG:-latest}
   - export TAG=$${BASE##v}
+  - echo $TAG
   - export TAG=${TAG//+/-}
+  - echo $TAG
   - if [ "$$TAG" == "latest" ]; then echo -n "latest" > .tags; else echo -n "latest,$${TAG},$${TAG%-*},$${TAG%.*},$${TAG%%.*}" > .tags; fi
-  - cat .tags
 
 - name: publish
   image: plugins/docker
