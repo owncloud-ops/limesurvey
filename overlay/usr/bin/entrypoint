@@ -5,7 +5,7 @@ set -eo pipefail
 /usr/local/bin/gomplate -V -o /etc/php7/php.ini -f /etc/templates/php.ini.tmpl
 /usr/local/bin/gomplate -V -o /var/www/app/application/config/config.php -f /etc/templates/config.php.tmpl
 
-printf "\nPrepare survey ..."
+printf "\nPrepare survey ...\n"
 
 if [ -n "$LIME_DB_HOST" ]
 then
@@ -16,9 +16,11 @@ else
     exit 1
 fi
 
-printf "\nSetup lime survey"
+printf "\nSetup lime survey\n"
 php /var/www/app/application/commands/console.php install "${LIME_ADMIN_USER}" "${LIME_ADMIN_PASSWORD}" "${LIME_ADMIN_USER}" "${LIME_ADMIN_EMAIL}"
 
+printf "\nSetup lime survey email config\n"
+/usr/local/bin/gomplate -V -o /var/www/app/application/config/email.php -f /etc/templates/email.php.tmpl
 
 printf "\nStarting survey ...\n"
 

@@ -16,7 +16,7 @@ docker build --build-arg BUILD_VERSION=1.8 -f Dockerfile -t limesurvey:latest .
 ```Shell
 LIME_ADMIN_USER=admin
 
-LIME_ADMIN_MAIL=admin@example.com
+LIME_ADMIN_MAIL=lime-admin@owncloud.com
 LIME_ADMIN_PASSWORD=****
 
 LIME_DB_USERNAME=
@@ -26,7 +26,11 @@ LIME_DB_DATABASE=limesurvey
 LIME_DB_CHARSET=utf8mb4
 
 LIME_MAILER_FROM=lime@example.com
-LIME_MAILER_URL="null://localhost"
+WAITFOR_TIMEOUT=60
+LIME_MAILER_URL=
+LIME_MAILER_PORT=
+LIME_MAILER_USER=
+LIME_MAILER_PASSWORD=
 ```
 
 ## License
