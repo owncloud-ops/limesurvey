@@ -3,8 +3,26 @@
 set -eo pipefail
 
 /usr/local/bin/gomplate -V -o /etc/php7/php.ini -f /etc/templates/php.ini.tmpl
+/usr/local/bin/gomplate -V -o /var/www/app/application/config/config.php -f /etc/templates/config.php.tmpl
 
 printf "\nPrepare survey ..."
+
+if [ -n "$LIME_DATABASE_URL" ]
+then
+    WAITFOR_DB_SCHEME=$(/usr/local/bin/url-parser scheme --url "$LIME_DATABASE_URL")
+    WAITFOR_DB_HOST=$(/usr/local/bin/url-parser host --url "$LIME_DATABASE_URL")
+    WAITFOR_DB_PORT=$(/usr/local/bin/url-parser port --url "$LIME_DATABASE_URL")
+
+    if [ "$WAITFOR_DB_SCHEME" == "mysql" ]
+    then
+        printf "Wait for database server on '%s:%s' ...\n" "$WAITFOR_DB_HOST" "${WAITFOR_DB_PORT:-3306}"
+        /usr/local/bin/wait-for "${WAITFOR_DB_HOST}":"${WAITFOR_DB_PORT:-3306}"
+    fi
+fi
+
+printf "\nSetup lime survey"
+#php /var/www/app/application/commands/console.php install "{$LIME_ADMIN_USER}" "{$LIME_ADMIN_PASSWORD}" "{$LIME_ADMIN_USER}" "{$LIME_ADMIN_EMAIL}"
+
 
 printf "\nStarting survey ...\n"
 

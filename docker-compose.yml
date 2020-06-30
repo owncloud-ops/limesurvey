@@ -2,28 +2,36 @@
 version: "3.5"
 
 services:
-  # db:
-  #   container_name: mariadb
-  #   image: ${MARIADB_IMAGE:-mariadb:10.4}
-  #   restart: always
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=rootpassword
-  #     - MYSQL_USER=limesurveyuser
-  #     - MYSQL_PASSWORD=limesurveypassword
-  #     - MYSQL_DATABASE=limesurvey
-  #   volumes:
-  #     - mariadb:/var/lib/mysql
+  db:
+    container_name: mariadb
+    image: ${MARIADB_IMAGE:-mariadb:10.4}
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=limesurveyuser
+      - MYSQL_PASSWORD=limesurveypassword
+      - MYSQL_DATABASE=limesurvey
+    volumes:
+      - mariadb:/var/lib/mysql
 
   lime:
     container_name: lime
     image: lime:dev
     ports:
       - "8080:8080"
+    environment:
+      - LIME_ADMIN_USER=admin
+      - LIME_ADMIN_MAIL=admin@example.com
+      - LIME_ADMIN_PASSWORD=test1234
+      - LIME_DATABASE_URL=mysql:host=lime_db;port=3306;dbname=limesurvey
+      - LIME_DB_NAME=limesurvey
+      - LIME_DB_ROOT_USER=root
+      - LIME_DB_ROOT_PASSWORD=test1234
     volumes:
       - limesurvey:/var/www/app/upload
 
 volumes:
   limesurvey:
     driver: local
-  # mariadb:
-  #   driver: local
+  mariadb:
+    driver: local

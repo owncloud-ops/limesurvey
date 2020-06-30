@@ -11,6 +11,24 @@ You could use the `BUILD_VERSION` to specify the target version.
 docker build --build-arg BUILD_VERSION=1.8 -f Dockerfile -t limesurvey:latest .
 ```
 
+## Environment Variables
+
+```Shell
+LIME_ADMIN_USER=admin
+
+LIME_ADMIN_MAIL=admin@example.com
+LIME_ADMIN_PASSWORD=****
+LIME_TRUSTED_HOSTS="localhost,127.0.0.1"
+
+LIME_DATABASE_URL="sqlite:////var/www/app/var/data/LIME.sqlite"
+LIME_DB_NAME="limesurvey"
+LIME_DB_ROOT_USER=root
+LIME_DB_ROOT_PASSWORD=****
+
+LIME_MAILER_FROM=lime@example.com
+LIME_MAILER_URL="null://localhost"
+```
+
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE](https://github.com/owncloud-ops/limesurvey/blob/master/LICENSE) file for details.
