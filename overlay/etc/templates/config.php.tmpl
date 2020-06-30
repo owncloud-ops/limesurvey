@@ -1,6 +1,4 @@
-<?php if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 return array(
     'components' => array(
         'db' => array(
@@ -24,5 +22,6 @@ return array(
     'config'=>array(
         'debug'=>0,
         'debugsql'=>0,
+        'mysqlEngine' => 'MYISAM',
     )
 );

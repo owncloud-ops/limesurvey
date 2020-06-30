@@ -7,17 +7,17 @@ set -eo pipefail
 
 printf "\nPrepare survey ..."
 
-if [ -n "$LIME_DATABASE_HOST" ]
+if [ -n "$LIME_DB_HOST" ]
 then
-    printf "Wait for database server on '%s:%s' ...\n" "$LIME_DATABASE_HOST" "${LIME_DATABASE_PORT:-3306}"
-    /usr/local/bin/wait-for "${LIME_DATABASE_HOST}":"${LIME_DATABASE_PORT:-3306}"
+    printf "\nWait for database server on '%s:%s' ...\n" "$LIME_DB_HOST" "${LIME_DB_PORT:-3306}"
+    /usr/local/bin/wait-for "${LIME_DB_HOST}":"${LIME_DB_PORT:-3306}"
 else
     printf "\nRequired environment variable '\$LIME_DATABASE_HOST' not set. Exiting ..."
     exit 1
 fi
 
 printf "\nSetup lime survey"
-#php /var/www/app/application/commands/console.php install "{$LIME_ADMIN_USER}" "{$LIME_ADMIN_PASSWORD}" "{$LIME_ADMIN_USER}" "{$LIME_ADMIN_EMAIL}"
+php /var/www/app/application/commands/console.php install "${LIME_ADMIN_USER}" "${LIME_ADMIN_PASSWORD}" "${LIME_ADMIN_USER}" "${LIME_ADMIN_EMAIL}"
 
 
 printf "\nStarting survey ...\n"
