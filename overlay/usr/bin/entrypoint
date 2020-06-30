@@ -7,17 +7,13 @@ set -eo pipefail
 
 printf "\nPrepare survey ..."
 
-if [ -n "$LIME_DATABASE_URL" ]
+if [ -n "$LIME_DATABASE_HOST" ]
 then
-    WAITFOR_DB_SCHEME=$(/usr/local/bin/url-parser scheme --url "$LIME_DATABASE_URL")
-    WAITFOR_DB_HOST=$(/usr/local/bin/url-parser host --url "$LIME_DATABASE_URL")
-    WAITFOR_DB_PORT=$(/usr/local/bin/url-parser port --url "$LIME_DATABASE_URL")
-
-    if [ "$WAITFOR_DB_SCHEME" == "mysql" ]
-    then
-        printf "Wait for database server on '%s:%s' ...\n" "$WAITFOR_DB_HOST" "${WAITFOR_DB_PORT:-3306}"
-        /usr/local/bin/wait-for "${WAITFOR_DB_HOST}":"${WAITFOR_DB_PORT:-3306}"
-    fi
+    printf "Wait for database server on '%s:%s' ...\n" "$LIME_DATABASE_HOST" "${LIME_DATABASE_PORT:-3306}"
+    /usr/local/bin/wait-for "${LIME_DATABASE_HOST}":"${LIME_DATABASE_PORT:-3306}"
+else
+    printf "\nRequired environment variable '\$LIME_DATABASE_HOST' not set. Exiting ..."
+    exit 1
 fi
 
 printf "\nSetup lime survey"
@@ -28,5 +24,3 @@ printf "\nStarting survey ...\n"
 
 php-fpm7 -F &
 exec nginx -g "daemon off;"
-
-
