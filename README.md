@@ -18,12 +18,12 @@ LIME_ADMIN_USER=admin
 
 LIME_ADMIN_MAIL=admin@example.com
 LIME_ADMIN_PASSWORD=****
-LIME_TRUSTED_HOSTS="localhost,127.0.0.1"
 
-LIME_DATABASE_URL="sqlite:////var/www/app/var/data/LIME.sqlite"
-LIME_DB_NAME="limesurvey"
-LIME_DB_ROOT_USER=root
-LIME_DB_ROOT_PASSWORD=****
+LIME_DB_USERNAME=
+LIME_DB_PASSWORD=
+LIME_DB_HOST=
+LIME_DB_DATABASE=limesurvey
+LIME_DB_CHARSET=utf8mb4
 
 LIME_MAILER_FROM=lime@example.com
 LIME_MAILER_URL="null://localhost"
