@@ -5,8 +5,8 @@ LABEL maintainer="ownCloud GmbH <devops@owncloud.com>" \
     org.label-schema.vendor="ownCloud GmbH" \
     org.label-schema.schema-version="1.0"
 
-ARG BUILD_VERSION=4.3.0+200616
-ENV SURVEY_VERSION="${BUILD_VERSION:-4.3.0+200616}"
+ARG BUILD_VERSION=4.3.1+200623
+ENV SURVEY_VERSION="${BUILD_VERSION:-4.3.1+200623}"
 
 ENV SURVEY_ADMIN_USER=admin
 ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php-fpm7 php"
