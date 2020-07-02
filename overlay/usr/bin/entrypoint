@@ -28,6 +28,7 @@ if ! [ -f "$INSTALLER_FLAG" ]; then
     php /var/www/app/application/commands/console.php install "${LIME_ADMIN_USER}" "${LIME_ADMIN_PASSWORD}" "${LIME_ADMIN_USER}" "${LIME_ADMIN_EMAIL}" true
     touch $INSTALLER_FLAG
     echo "$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')" > $INSTALLER_FLAG
+    echo $INSTALLER_FLAG >> $INSTALLER_FLAG
 else
     printf "\nInstall already performed at former container start\n"
 fi
@@ -35,13 +36,16 @@ fi
 # Database update shall only be performed if there is a new version installed to avoid updatedb to cause a php stacktrace...
 # updatedb breaks if email.php has been templated in a former container start
 printf "\nPerform database update check\n"
-VERSION_INSTALL=$(cat $INSTALLER_FLAG)
-VERSION_FOLDER="$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')"
-if [ "$VERSION_INSTALL" = "$VERSION_FOLDER" ]; then
+VERSION_LATEST_INSTALL=$(tail -1 $INSTALLER_FLAG)
+VERSION_NEW="$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')"
+if [ "$VERSION_LATEST_INSTALL" = "$VERSION_NEW" ]; then
     printf "\nNo database update needed\n"
 else
     printf "\nPerform database update and see if version offset needs database migration\n"
+    # Lime Devs told that it's sometimes neccesary to clean the runtime cache to run db migrations 
+    rm -r tmp/runtime/*
     php /var/www/app/application/commands/console.php updatedb
+    sed -i "2s/.*/$VERSION_NEW/" $INSTALLER_FLAG
 fi
 
 # updatedb will break if we execute the command with a templated email.php
