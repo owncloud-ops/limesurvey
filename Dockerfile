@@ -5,6 +5,8 @@ LABEL maintainer="ownCloud GmbH <devops@owncloud.com>" \
     org.label-schema.vendor="ownCloud GmbH" \
     org.label-schema.schema-version="1.0"
 
+# Database migrations work for releases from 4.x.x on upwards. From 4.x.x to 5.x.x testing is neccesary!!!!
+# Migrations from 3.x.x to 4.x.x break the underlying yii framework.
 ARG BUILD_VERSION=4.3.1+200623
 ENV SURVEY_VERSION="${BUILD_VERSION:-4.3.1+200623}"
 
