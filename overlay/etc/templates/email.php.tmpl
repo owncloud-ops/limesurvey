@@ -12,7 +12,7 @@ $config['emailsmtphost']      = '{{ getenv "LIME_MAILER_URL" "mx.example.com" }}
 
 $config['emailsmtpuser']      = '{{ getenv "LIME_MAILER_USER" }}'; 
 $config['emailsmtppassword']  = '{{ getenv "LIME_MAILER_PASSWORD" }}'; 
-$config['emailsmtpssl']       = 'tls';
+$config['emailsmtpssl']       = '{{ getenv "LIME_MAILER_ENCRYPTION" "ssl" }}'; 
 
 $config['emailsmtpdebug']     = 0;
 
