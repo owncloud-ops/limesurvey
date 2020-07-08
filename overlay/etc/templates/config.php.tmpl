@@ -4,7 +4,7 @@ return array(
         'db' => array(
             'connectionString' => 'mysql:host={{ getenv "LIME_DB_HOST" "localhost" }};port={{ getenv "LIME_DB_PORT" "3306" }};dbname={{ getenv "LIME_DB_DATABASE" "limesurvey" }};',
             'emulatePrepare' => true,
-            'username' => '{{ getenv "LIME_DB_USERNAME" "limesurvey" }}',
+            'username' => '{{ getenv "LIME_DB_USERNAME" }}',
             'password' => '{{ getenv "LIME_DB_PASSWORD" }}',
             'charset' => '{{ getenv "LIME_DB_CHARSET" "utf8mb4" }}',
             'tablePrefix' => 'lime_',
@@ -23,7 +23,7 @@ return array(
         'debug' => 0,
         'debugsql' => 0,
         'mysqlEngine' => 'MYISAM',
-        'sitename' => 'limesurvey',
-        'ssl_disable_alert' => '{{ getenv "SSL_DISABLE_ALERT" "false" }}',
+        'sitename' => '{{ getenv "LIME_SITENAME" "LimeSurvey" }}',
+        'ssl_disable_alert' => {{ getenv "LIME_SSL_DISABLE_ALERT" "false" }},
     )
 );
