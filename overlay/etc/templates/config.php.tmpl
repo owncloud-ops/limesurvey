@@ -24,6 +24,6 @@ return array(
         'debugsql' => 0,
         'mysqlEngine' => 'MYISAM',
         'sitename' => 'limesurvey',
-        'ssl_disable_alert' => true,
+        'ssl_disable_alert' => '{{ getenv "SSL_DISABLE_ALERT" false }}',
     )
 );
