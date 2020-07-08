@@ -8,7 +8,7 @@ $config['siteadminname']      = '{{ getenv "LIME_ADMIN_USER" }}';
 $config['emailmethod']        = 'smtp';
 $config['protocol'] = $config['emailmethod'];
 
-$config['emailsmtphost']      = '{{ getenv "LIME_MAILER_URL" "kopano.owncloud.com" }}:{{ getenv "LIME_MAILER_PORT" "465" }}';
+$config['emailsmtphost']      = '{{ getenv "LIME_MAILER_URL" "mx.example.com" }}:{{ getenv "LIME_MAILER_PORT" "465" }}';
 
 $config['emailsmtpuser']      = '{{ getenv "LIME_MAILER_USER" }}'; 
 $config['emailsmtppassword']  = '{{ getenv "LIME_MAILER_PASSWORD" }}'; 
