@@ -3,6 +3,8 @@
 
 ## LimeSurvey
 
+Custom Docker image for [LimeSurvey](https://www.limesurvey.org/de/).
+
 ## Build
 
 You could use the `BUILD_VERSION` to specify the target version.
