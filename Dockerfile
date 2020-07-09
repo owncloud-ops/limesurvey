@@ -7,7 +7,7 @@ LABEL maintainer="ownCloud GmbH <devops@owncloud.com>" \
 
 # Database migrations work for releases from 4.x.x on upwards. From 4.x.x to 5.x.x testing is neccesary!!!!
 # Migrations from 3.x.x to 4.x.x break the underlying yii framework.
-ARG BUILD_VERSION=4.3.1+200623
+ARG BUILD_VERSION=4.3.2+200629
 ENV SURVEY_VERSION="${BUILD_VERSION:-4.3.1+200623}"
 
 ENV SURVEY_ADMIN_USER=admin
