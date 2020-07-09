@@ -3,6 +3,8 @@
 
 ## LimeSurvey
 
+Custom Docker image for [LimeSurvey](https://www.limesurvey.org/de/).
+
 ## Build
 
 You could use the `BUILD_VERSION` to specify the target version.
@@ -34,7 +36,8 @@ LIME_MAILER_PASSWORD=****
 LIME_MAILER_ENCRYPTION=ssl
 LIME_MAIL_PROTOCOL=smtp
 
-SSL_DISABLE_ALERT=false
+LIME_SITENAME=LimeSurvey
+LIME_SSL_DISABLE_ALERT=false
 ```
 
 ## License
