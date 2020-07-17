@@ -9,6 +9,7 @@ Custom Docker image for [LimeSurvey](https://www.limesurvey.org/de/).
 
 ```Shell
 LIME_ADMIN_USER=admin
+LIME_ADMIN_NAME=Administrator
 
 LIME_ADMIN_MAIL=lime-admin@example.com
 LIME_ADMIN_PASSWORD=****

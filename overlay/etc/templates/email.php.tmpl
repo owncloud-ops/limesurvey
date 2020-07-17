@@ -3,7 +3,7 @@
 $config = array();
 $config['siteadminemail']     = '{{ getenv "LIME_ADMIN_EMAIL" "your-email@example.net" }}'; 
 $config['siteadminbounce']    = '{{ getenv "LIME_ADMIN_EMAIL" "your-email@example.net" }}'; 
-$config['siteadminname']      = '{{ getenv "LIME_ADMIN_USER" "Your Name" }}'; 
+$config['siteadminname']      = '{{ getenv "LIME_ADMIN_NAME" "Your Name" }}'; 
 
 $config['emailmethod']        = '{{ getenv "LIME_MAIL_PROTOCOL" "smtp" }}';
 $config['protocol'] = $config['emailmethod'];
