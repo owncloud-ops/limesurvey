@@ -1,17 +1,9 @@
+# limesurvey
+
 [![Build Status](https://drone.owncloud.com/api/badges/owncloud-ops/limesurvey/status.svg)](https://drone.owncloud.com/owncloud-ops/limesurvey)
 [![Docker Hub](https://img.shields.io/badge/docker-latest-blue.svg?logo=docker&logoColor=white)](https://hub.docker.com/r/owncloudops/limesurvey)
 
-## LimeSurvey
-
 Custom Docker image for [LimeSurvey](https://www.limesurvey.org/de/).
-
-## Build
-
-You could use the `BUILD_VERSION` to specify the target version.
-
-```Shell
-docker build --build-arg BUILD_VERSION=1.8 -f Dockerfile -t limesurvey:latest .
-```
 
 ## Environment Variables
 
@@ -38,6 +30,14 @@ LIME_MAIL_PROTOCOL=smtp
 
 LIME_SITENAME=LimeSurvey
 LIME_SSL_DISABLE_ALERT=false
+```
+
+## Build
+
+You could use the `BUILD_VERSION` to specify the target version.
+
+```Shell
+docker build --build-arg BUILD_VERSION=1.8 -f Dockerfile -t kimai2:latest .
 ```
 
 ## License
