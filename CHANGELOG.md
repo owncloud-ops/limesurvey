@@ -1,2 +1,3 @@
-* INITIAL:
-  * implements basic container for limesurvey
+* ENHANCEMENT
+  * add ldap querying for Survey user list creation
+  * improves config
