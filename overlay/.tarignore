@@ -1,7 +1,4 @@
 .git*
-.php*
-.editor*
-.code*
 *.md
-Dockerfile*
 tests
+yarn.lock
