@@ -100,7 +100,6 @@ trigger:
   ref:
   - refs/heads/master
   - refs/tags/**
-  - refs/pull/**
   status:
   - success
   - failure
