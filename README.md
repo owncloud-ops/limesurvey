@@ -29,7 +29,6 @@ LIME_MAILER_PASSWORD=****
 LIME_MAILER_ENCRYPTION=ssl
 LIME_MAIL_PROTOCOL=smtp
 
-LIME_SITENAME=LimeSurvey
 LIME_SSL_DISABLE_ALERT=false
 
 # This variable need to be set to enable LDAP queries

@@ -9,7 +9,7 @@ $ldap_server[$serverId]['referrals'] = '{{ getenv "LIME_LDAP_QUERY_REFERALS" "fa
 $ldap_server[$serverId]['binddn'] = '{{ getenv "LIME_LDAP_QUERY_BINDDN" }}';
 $ldap_server[$serverId]['bindpw'] = '{{ getenv "LIME_LDAP_QUERY_BINDPW" }}';
 
-{{ range $index, $element := (( getenv "LIME_LDAP_QUERY_GROUPLIST") | strings.Split ",") }}
+{{ range $index, $element := ((getenv "LIME_LDAP_QUERY_GROUPLIST") | strings.Split ",") }}
 {{ $element = $element | strings.TrimSpace }}
 $query_id = {{ $index }};
 $ldap_queries[$query_id]['ldapServerId'] = 0;

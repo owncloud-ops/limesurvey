@@ -23,8 +23,8 @@ return array(
         'debug' => 0,
         'debugsql' => 0,
         {{- if (getenv "LIME_LDAP_QUERY_SERVER") }}
-        'enableLdap'=>true, {{ else -}}
-        {{ end }}
+        'enableLdap'=>true,
+        {{ end -}}
         'mysqlEngine' => 'MYISAM',
         'ssl_disable_alert' => {{ getenv "LIME_SSL_DISABLE_ALERT" "false" }},
     )
