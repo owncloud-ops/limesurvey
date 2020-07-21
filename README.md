@@ -9,10 +9,10 @@ Custom Docker image for [LimeSurvey](https://www.limesurvey.org/de/).
 
 ```Shell
 LIME_ADMIN_USER=admin
-LIME_ADMIN_NAME=Administrator
-
-LIME_ADMIN_MAIL=lime-admin@example.com
 LIME_ADMIN_PASSWORD=****
+LIME_ADMIN_NAME=Administrator
+LIME_ADMIN_EMAIL=your-email@example.com
+LIME_ADMIN_BOUNCE=your-email@example.com
 
 LIME_DB_USERNAME=limesurvey
 LIME_DB_PASSWORD=****
@@ -27,7 +27,7 @@ LIME_MAILER_PORT=465
 LIME_MAILER_USER=sender
 LIME_MAILER_PASSWORD=****
 LIME_MAILER_ENCRYPTION=ssl
-LIME_MAIL_PROTOCOL=smtp
+LIME_MAILER_PROTOCOL=smtp
 
 LIME_SSL_DISABLE_ALERT=false
 

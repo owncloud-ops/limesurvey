@@ -1,23 +1,21 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config = array();
-$config['siteadminemail']     = '{{ getenv "LIME_ADMIN_EMAIL" "your-email@example.net" }}'; 
-$config['siteadminbounce']    = '{{ getenv "LIME_ADMIN_EMAIL" "your-email@example.net" }}'; 
-$config['siteadminname']      = '{{ getenv "LIME_ADMIN_NAME" "Your Name" }}'; 
+$config['siteadminemail']     = '{{ getenv "LIME_ADMIN_EMAIL" "your-email@example.com" }}';
+$config['siteadminbounce']    = '{{ getenv "LIME_ADMIN_BOUNCE" "your-email@example.com" }}';
+$config['siteadminname']      = '{{ getenv "LIME_ADMIN_NAME" "Your Name" }}';
 
-$config['emailmethod']        = '{{ getenv "LIME_MAIL_PROTOCOL" "smtp" }}';
-$config['protocol'] = $config['emailmethod'];
+$config['emailmethod']        = '{{ getenv "LIME_MAILER_PROTOCOL" "smtp" }}';
+$config['protocol']           = $config['emailmethod'];
 
 $config['emailsmtphost']      = '{{ getenv "LIME_MAILER_URL" "mx.example.com" }}:{{ getenv "LIME_MAILER_PORT" "465" }}';
-
-$config['emailsmtpuser']      = '{{ getenv "LIME_MAILER_USER" "" }}'; 
-$config['emailsmtppassword']  = '{{ getenv "LIME_MAILER_PASSWORD" "" }}'; 
-$config['emailsmtpssl']       = '{{ getenv "LIME_MAILER_ENCRYPTION" "ssl" }}'; 
+$config['emailsmtpuser']      = '{{ getenv "LIME_MAILER_USER" }}';
+$config['emailsmtppassword']  = '{{ getenv "LIME_MAILER_PASSWORD" }}';
+$config['emailsmtpssl']       = '{{ getenv "LIME_MAILER_ENCRYPTION" "ssl" }}';
 
 $config['emailsmtpdebug']     = 0;
 
-$config['maxemails']          = 50; 
-
+$config['maxemails']          = 50;
 $config['emailcharset']       = "utf-8";
 
-return $config; 
+return $config;
