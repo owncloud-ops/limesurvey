@@ -1,3 +1,3 @@
 * ENHANCEMENT
-  * add ldap querying for Survey user list creation
-  * improves config
+  * improve readability and use range variable
+  * make ldap template more robust and strip whitespaces
