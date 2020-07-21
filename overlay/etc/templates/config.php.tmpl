@@ -22,6 +22,9 @@ return array(
     'config'=>array(
         'debug' => 0,
         'debugsql' => 0,
+        {{- if (getenv "LIME_LDAP_QUERY_SERVER") }}
+        'enableLdap'=>true, {{ else -}}
+        {{ end }}
         'mysqlEngine' => 'MYISAM',
         'sitename' => '{{ getenv "LIME_SITENAME" "LimeSurvey" }}',
         'ssl_disable_alert' => {{ getenv "LIME_SSL_DISABLE_ALERT" "false" }},

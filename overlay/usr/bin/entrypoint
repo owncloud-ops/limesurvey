@@ -54,6 +54,9 @@ fi
 printf "\nSetup lime survey email config\n\n"
 /usr/local/bin/gomplate -V -o /var/www/app/application/config/email.php -f /etc/templates/email.php.tmpl
 
+printf "\nSetup lime survey ldap config\n\n"
+/usr/local/bin/gomplate -V -o /var/www/app/application/config/ldap.php -f /etc/templates/ldap.php.tmpl
+
 printf "\nStarting survey ...\n\n"
 
 php-fpm7 -F &

@@ -1,0 +1,27 @@
+<?php
+
+$serverId = 0;
+$ldap_server[$serverId]['server'] = '{{ getenv "LIME_LDAP_QUERY_SERVER" "ldap.example.com" }}';
+$ldap_server[$serverId]['port'] = '{{ getenv "LIME_LDAP_QUERY_PORT" "389" }}';
+$ldap_server[$serverId]['protoversion'] = '{{ getenv "LIME_LDAP_QUERY_PROTOVERSION" "ldapv2" }}';
+$ldap_server[$serverId]['encrypt'] = '{{ getenv "LIME_LDAP_QUERY_ENCRYPTION" "ldap" }}';
+$ldap_server[$serverId]['referrals'] = '{{ getenv "LIME_LDAP_QUERY_REFERALS" "false" }}';
+$ldap_server[$serverId]['binddn'] = '{{ getenv "LIME_LDAP_QUERY_BINDDN" "" }}';
+$ldap_server[$serverId]['bindpw'] = '{{ getenv "LIME_LDAP_QUERY_BINDPW" "" }}';
+
+{{ range $index, $element := ( ( getenv "LIME_LDAP_QUERY_GROUPLIST" ) | strings.Split "," ) }}
+$query_id = {{ $index }};
+$ldap_queries[$query_id]['ldapServerId'] = 0;
+$ldap_queries[$query_id]['name'] = '{{.}}';
+$ldap_queries[$query_id]['userbase'] = '{{ getenv "LIME_LDAP_QUERY_BASEDN" "ou=Users,dc=example,dc=local" }}';
+$ldap_queries[$query_id]['userfilter'] = '(&(objectClass=inetOrgPerson)(memberOf=cn={{.}},ou=Named,dc=owncloud,dc=local))';
+$ldap_queries[$query_id]['userscope'] = 'sub';
+$ldap_queries[$query_id]['firstname_attr'] = 'givenname';
+$ldap_queries[$query_id]['lastname_attr'] = 'sn';
+$ldap_queries[$query_id]['email_attr'] = 'mail';
+$ldap_queries[$query_id]['token_attr'] = '';
+$ldap_queries[$query_id]['language'] = '';
+$ldap_queries[$query_id]['attr1'] = '';
+$ldap_queries[$query_id]['attr2'] = '';
+{{ end }}
+return array('ldap_server' => $ldap_server, 'ldap_queries' => $ldap_queries);
