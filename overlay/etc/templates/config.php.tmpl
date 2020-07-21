@@ -26,7 +26,6 @@ return array(
         'enableLdap'=>true, {{ else -}}
         {{ end }}
         'mysqlEngine' => 'MYISAM',
-        'sitename' => '{{ getenv "LIME_SITENAME" "LimeSurvey" }}',
         'ssl_disable_alert' => {{ getenv "LIME_SSL_DISABLE_ALERT" "false" }},
     )
 );
