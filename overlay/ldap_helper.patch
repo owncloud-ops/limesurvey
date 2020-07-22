@@ -1,15 +1,18 @@
---- ldap_helper_new.php
-+++ ldap_helper.php
-@@ -27,7 +27,11 @@
+--- ldap_helper.php.original	2020-07-22 21:15:39.886430791 +0200
++++ ldap_helper.php	2020-07-22 21:21:33.571164022 +0200
+@@ -26,8 +26,13 @@
+         return false;
      } else {
          $ds = false;
-         if ($ldap_server[$server_id]['protoversion'] == 'ldapv3' && $ldap_server[$server_id]['encrypt'] != 'ldaps') {
+-        if ($ldap_server[$server_id]['protoversion'] == 'ldapv3' && $ldap_server[$server_id]['encrypt'] != 'ldaps') {
 -            $ds = ldap_connect($ldap_server[$server_id]['server'], $ldap_server[$server_id]['port']);
++        if ($ldap_server[$server_id]['protoversion'] == 'ldapv3') {
 +            if ($ldap_server[$server_id]['encrypt'] == 'ldaps') {
 +                $ds = ldap_connect("ldaps://".$ldap_server[$server_id]['server'], $ldap_server[$server_id]['port']);
 +            } else {
 +                $ds = ldap_connect($ldap_server[$server_id]['server'], $ldap_server[$server_id]['port']);
 +            }
++
              ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-
+ 
              if (!$ldap_server[$server_id]['referrals']) {

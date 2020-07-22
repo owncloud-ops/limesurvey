@@ -1,0 +1,2 @@
+- BUGFIX
+  - fix condition in ldap_helper.php patch
