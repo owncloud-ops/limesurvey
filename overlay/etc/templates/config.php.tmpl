@@ -2,7 +2,7 @@
 return array(
     'components' => array(
         'db' => array(
-            'connectionString' => 'mysql:host={{ getenv "LIME_DB_HOST" "localhost" }};port={{ getenv "LIME_DB_PORT" "3306" }};dbname={{ getenv "LIME_DB_DATABASE" "limesurvey" }};',
+            'connectionString' => 'mysql:host={{ getenv "LIME_DB_HOST" "localhost" }};port={{ getenv "LIME_DB_PORT" "3306" }};dbname={{ getenv "LIME_DB_NAME" "limesurvey" }};',
             'emulatePrepare' => true,
             'username' => '{{ getenv "LIME_DB_USERNAME" }}',
             'password' => '{{ getenv "LIME_DB_PASSWORD" }}',
@@ -23,8 +23,8 @@ return array(
         'debug' => 0,
         'debugsql' => 0,
         {{- if (getenv "LIME_LDAP_QUERY_SERVER") }}
-        'enableLdap'=>true, {{ else -}}
-        {{ end }}
+        'enableLdap'=>true,
+        {{ end -}}
         'mysqlEngine' => 'MYISAM',
         'ssl_disable_alert' => {{ getenv "LIME_SSL_DISABLE_ALERT" "false" }},
     )

@@ -9,16 +9,17 @@ $ldap_server[$serverId]['referrals'] = '{{ getenv "LIME_LDAP_QUERY_REFERALS" "fa
 $ldap_server[$serverId]['binddn'] = '{{ getenv "LIME_LDAP_QUERY_BINDDN" }}';
 $ldap_server[$serverId]['bindpw'] = '{{ getenv "LIME_LDAP_QUERY_BINDPW" }}';
 
-{{ range $index, $element := (( getenv "LIME_LDAP_QUERY_GROUPLIST") | strings.Split ",") }}
+{{ range $index, $element := ((getenv "LIME_LDAP_QUERY_GROUPLIST") | strings.Split ",") }}
+{{ $element = $element | strings.TrimSpace }}
 $query_id = {{ $index }};
 $ldap_queries[$query_id]['ldapServerId'] = 0;
-$ldap_queries[$query_id]['name'] = '{{ getenv ((print "LIME_LDAP_QUERY_" . "_NAME") | strings.ToUpper) (. | strings.ToUpper) }}';
-$ldap_queries[$query_id]['userbase'] = '{{ getenv ((print "LIME_LDAP_QUERY_" . "_USERBASE") | strings.ToUpper) }}';
-$ldap_queries[$query_id]['userfilter'] = '{{ getenv ((print "LIME_LDAP_QUERY_" . "_USERFILTER") | strings.ToUpper) "(&(objectClass=inetOrgPerson))" }}';
-$ldap_queries[$query_id]['userscope'] = '{{ getenv ((print "LIME_LDAP_QUERY_" . "_USERSCOPE") | strings.ToUpper) "sub" }}';
-$ldap_queries[$query_id]['firstname_attr'] = '{{ getenv ((print "LIME_LDAP_QUERY_" . "_FIRSTNAME_ATTR") | strings.ToUpper) "givenname" }}';
-$ldap_queries[$query_id]['lastname_attr'] = '{{ getenv ((print "LIME_LDAP_QUERY_" . "_LASTNAME_ATTR") | strings.ToUpper) "sn" }}';
-$ldap_queries[$query_id]['email_attr'] = '{{ getenv ((print "LIME_LDAP_QUERY_" . "_EMAIL_ATTR") | strings.ToUpper) "mail" }}';
+$ldap_queries[$query_id]['name'] = '{{ getenv ((print "LIME_LDAP_QUERY_" $element "_NAME") | strings.ToUpper) ($element | strings.ToUpper) }}';
+$ldap_queries[$query_id]['userbase'] = '{{ getenv ((print "LIME_LDAP_QUERY_" $element "_USERBASE") | strings.ToUpper) }}';
+$ldap_queries[$query_id]['userfilter'] = '{{ getenv ((print "LIME_LDAP_QUERY_" $element "_USERFILTER") | strings.ToUpper) "(&(objectClass=inetOrgPerson))" }}';
+$ldap_queries[$query_id]['userscope'] = '{{ getenv ((print "LIME_LDAP_QUERY_" $element "_USERSCOPE") | strings.ToUpper) "sub" }}';
+$ldap_queries[$query_id]['firstname_attr'] = '{{ getenv ((print "LIME_LDAP_QUERY_" $element "_FIRSTNAME_ATTR") | strings.ToUpper) "givenname" }}';
+$ldap_queries[$query_id]['lastname_attr'] = '{{ getenv ((print "LIME_LDAP_QUERY_" $element "_LASTNAME_ATTR") | strings.ToUpper) "sn" }}';
+$ldap_queries[$query_id]['email_attr'] = '{{ getenv ((print "LIME_LDAP_QUERY_" $element "_EMAIL_ATTR") | strings.ToUpper) "mail" }}';
 $ldap_queries[$query_id]['token_attr'] = '';
 $ldap_queries[$query_id]['language'] = 'en';
 $ldap_queries[$query_id]['attr1'] = '';
