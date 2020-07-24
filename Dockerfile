@@ -28,6 +28,7 @@ RUN apk --update add --virtual .build-deps tar curl composer && \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
     curl -SsL -o /etc/php7/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
     patch /var/www/app/application/helpers/ldap_helper.php /ldap_helper.patch && \
+    patch /var/www/app/application/views/admin/survey/topbar/token_bar.php /token_bar.patch && \
     mkdir -p /var/www/app/upload/surveys && \
     mkdir -p /var/www/app/uploadstruct && \
     cp -a /var/www/app/upload/* /var/www/app/uploadstruct && \
