@@ -1,5 +1,5 @@
 --- token_bar.php.original	2020-07-24 10:35:43.540889910 +0200
-+++ token_bar.php	2020-07-24 10:36:18.976259838 +0200
++++ token_bar.php	2020-07-24 11:16:22.740141644 +0200
 @@ -211,7 +211,7 @@
              $isDisabled = true;
          }
@@ -9,7 +9,20 @@
              $errorMessages[] = gT("Bounce processing is deactivated either application-wide or for this survey in particular.");
              $isDisabled = true;
          }
-@@ -276,7 +276,7 @@
+@@ -219,11 +219,10 @@
+         $errorMessage = join("\n", $errorMessages);
+ 
+         $buttons['bounce_processing'] = [
+-            'url' => '#',
++            'url' => $isDisabled ? '' : $this->createUrl("admin/tokens/sa/bounceprocessing/surveyid/$sid"),
+             'alerttext' => $errorMessage,
+             'icon' => 'fa fa-cogs',
+             'id' => 'startbounceprocessing',
+-            'data-url' => $isDisabled ? '' : $this->createUrl("admin/tokens/sa/bounceprocessing/surveyid/$sid"),
+             'name' => gT('Start bounce processing'),
+             'class' => 'pjax ' . ($isDisabled ? ' disabled' : ' '),
+         ];
+@@ -276,7 +275,7 @@
  
      ###### Right aligned
  
