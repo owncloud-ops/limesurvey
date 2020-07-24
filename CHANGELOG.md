@@ -1,2 +1,2 @@
-- ENHANCEMENT
-  - patch bounce processing conditions
+- BUGFIX
+  - fix broken url attribute on bounce processing button
