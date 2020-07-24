@@ -1,2 +1,2 @@
 - ENHANCEMENT
-  - upgrade upstream version
+  - patch bounce processing conditions
