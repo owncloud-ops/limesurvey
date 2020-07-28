@@ -1,0 +1,7 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+$config = array();
+$config['encryptionkeypair'] = '{{ getenv "LIME_ENCRYPTION_KEYPAIR" }}';
+$config['encryptionpublickey'] = '{{ getenv "LIME_ENCRYPTION_PUBLIC_KEY" }}';
+$config['encryptionsecretkey'] = '{{ getenv "LIME_ENCRYPTION_SECRET_KEY" }}';
+return $config;
