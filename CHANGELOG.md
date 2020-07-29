@@ -1,4 +1,0 @@
-- BUGFIX
-  - add option to create security.php from env variables
-- ENHANCEMENT
-  - upgrade upstream version
