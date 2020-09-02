@@ -8,25 +8,25 @@ source /usr/local/lib/log.sh
 /usr/local/bin/gomplate -V -o /var/www/app/application/config/config.php -f /etc/templates/config.php.tmpl
 
 if [ -f application/config/security.php ]; then
-    log_info 'File security.php already provisioned ...'
+    log_info 'File security.php already provisioned'
 else
-    log_info 'Creating security.php ...'
+    log_info 'Creating security.php'
     if [ -n "$LIME_ENCRYPTION_KEYPAIR" ]; then
         /usr/local/bin/gomplate -V -o /var/www/app/application/config/security.php -f /etc/templates/security.php.tmpl
     else
-        log_warn 'No encryption keys was provided. A security.php config will be created by the application ...'
+        log_warn 'No encryption keys was provided. A security.php config will be created by the application'
         log_warn 'THIS FILE NEEDS TO BE PERSISTENT'
     fi
 fi
 
-log_info "Prepare LimeSurvey ..."
+log_info "Prepare LimeSurvey"
 
 if [ -n "$LIME_DB_HOST" ]
 then
-    log_info "Wait for database server on '%s:%s' ..." "$LIME_DB_HOST" "${LIME_DB_PORT:-3306}"
+    log_info "Wait for database server on '%s:%s'" "$LIME_DB_HOST" "${LIME_DB_PORT:-3306}"
     /usr/local/bin/wait-for "${LIME_DB_HOST}":"${LIME_DB_PORT:-3306}"
 else
-    log_warn "Required environment variable '\$LIME_DATABASE_HOST' not set. Exiting ..."
+    log_warn "Required environment variable '\$LIME_DATABASE_HOST' not set. Exiting"
     exit 1
 fi
 
@@ -34,28 +34,28 @@ fi
 # If so, it will avoid the container from being restarted but also from being updated.
 # LimeSurvey isn't offering any good mechanism to catch the failing as there are side effects that influence the thrown exception.
 # Plugins is a persisted volume that we use for creating our custom "installation done" flag
-log_info "Setup LimeSurvey ..."
-log_info "Check if install has been performed already ..."
+log_info "Setup LimeSurvey"
+log_info "Check if install has been performed already"
 INSTALLER_FLAG=plugins/install.done
 if ! [ -f "$INSTALLER_FLAG" ]; then
-    log_info "Install LimeSurvey ..."
+    log_info "Install LimeSurvey"
     php /var/www/app/application/commands/console.php install "${LIME_ADMIN_USER}" "${LIME_ADMIN_PASSWORD}" "${LIME_ADMIN_USER}" "${LIME_ADMIN_EMAIL}" true
     touch $INSTALLER_FLAG
     echo "$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')" > $INSTALLER_FLAG
     echo $INSTALLER_FLAG >> $INSTALLER_FLAG
 else
-    log_info "Install already performed at former container start ..."
+    log_info "Install already performed at former container start"
 fi
 
 # Database update shall only be performed if there is a new version installed to avoid updatedb to cause a php stacktrace...
 # updatedb breaks if email.php has been templated in a former container start
-log_info "Perform database update check ..."
+log_info "Perform database update check"
 VERSION_LATEST_INSTALL=$(tail -1 $INSTALLER_FLAG)
 VERSION_NEW="$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')"
 if [ "$VERSION_LATEST_INSTALL" = "$VERSION_NEW" ]; then
-    log_info "No database update needed ..."
+    log_info "No database update needed"
 else
-    log_warn "Perform database update and see if version offset needs database migration ..."
+    log_warn "Perform database update and see if version offset needs database migration"
     # Lime Devs told that it's sometimes neccesary to clean the runtime cache to run db migrations
     rm -r tmp/runtime/*
     php /var/www/app/application/commands/console.php updatedb
@@ -65,13 +65,13 @@ fi
 # updatedb will break if we execute the command with a templated email.php
 # Since we check the versionnumber from the former install against the latest folder version, we can keep
 # the templating in here without condition as updatedb is only executed when the version changed and then it's working as expected
-log_info "Setup LimeSurvey email config ..."
+log_info "Setup LimeSurvey email config"
 /usr/local/bin/gomplate -V -o /var/www/app/application/config/email.php -f /etc/templates/email.php.tmpl
 
-log_info "Setup LimeSurvey ldap config ..."
+log_info "Setup LimeSurvey ldap config"
 /usr/local/bin/gomplate -V -o /var/www/app/application/config/ldap.php -f /etc/templates/ldap.php.tmpl
 
-log_info "Starting survey ..."
+log_info "Starting survey\n\n"
 
 php-fpm7 -F &
 exec nginx -g "daemon off;"
