@@ -8,14 +8,14 @@ source /usr/local/lib/log.sh
 /usr/local/bin/gomplate -V -o /var/www/app/application/config/config.php -f /etc/templates/config.php.tmpl
 
 if [ -f application/config/security.php ]; then
-    log_info 'File security.php already provisioned'
+    log_info "File security.php already provisioned"
 else
-    log_info 'Creating security.php'
+    log_info "Creating security.php"
     if [ -n "$LIME_ENCRYPTION_KEYPAIR" ]; then
         /usr/local/bin/gomplate -V -o /var/www/app/application/config/security.php -f /etc/templates/security.php.tmpl
     else
-        log_warn 'No encryption keys was provided. A security.php config will be created by the application'
-        log_warn 'THIS FILE NEEDS TO BE PERSISTENT'
+        log_warn "No encryption keys was provided. A security.php config will be created by the application"
+        log_warn "THIS FILE NEEDS TO BE PERSISTENT"
     fi
 fi
 
