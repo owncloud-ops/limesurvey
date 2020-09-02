@@ -1,2 +1,0 @@
-- ENHANCEMENT
-  - refactor logging
