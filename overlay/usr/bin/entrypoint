@@ -14,8 +14,8 @@ else
     if [ -n "$LIME_ENCRYPTION_KEYPAIR" ]; then
         /usr/local/bin/gomplate -V -o /var/www/app/application/config/security.php -f /etc/templates/security.php.tmpl
     else
-        log_warn 'No encryption keys was provided. A security.php config will be created by the application ...\n'
-        log_warn 'THIS FILE NEEDS TO BE PERSISTENT\n'
+        log_warn 'No encryption keys was provided. A security.php config will be created by the application ...'
+        log_warn 'THIS FILE NEEDS TO BE PERSISTENT'
     fi
 fi
 
