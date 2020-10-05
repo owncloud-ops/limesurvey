@@ -1,0 +1,3 @@
+- ENHANCEMENT
+  - fix logging
+  - update upstream version
