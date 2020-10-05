@@ -14,8 +14,7 @@ else
     if [ -n "$LIME_ENCRYPTION_KEYPAIR" ]; then
         /usr/local/bin/gomplate -V -o /var/www/app/application/config/security.php -f /etc/templates/security.php.tmpl
     else
-        log_warn "No encryption keys was provided. A security.php config will be created by the application"
-        log_warn "THIS FILE NEEDS TO BE PERSISTENT"
+        log_warn "No encryption keys was provided. A security.php config will be created by the application. HIS FILE NEEDS TO BE PERSISTENT"
     fi
 fi
 
@@ -23,7 +22,7 @@ log_info "Prepare LimeSurvey"
 
 if [ -n "$LIME_DB_HOST" ]
 then
-    log_info "Wait for database server on '%s:%s'" "$LIME_DB_HOST" "${LIME_DB_PORT:-3306}"
+    log_info "Wait for database server on '${LIME_DB_HOST}:${LIME_DB_PORT:-3306}'"
     /usr/local/bin/wait-for "${LIME_DB_HOST}":"${LIME_DB_PORT:-3306}"
 else
     log_warn "Required environment variable '\$LIME_DATABASE_HOST' not set. Exiting"
@@ -71,7 +70,7 @@ log_info "Setup LimeSurvey email config"
 log_info "Setup LimeSurvey ldap config"
 /usr/local/bin/gomplate -V -o /var/www/app/application/config/ldap.php -f /etc/templates/ldap.php.tmpl
 
-log_info "Starting survey\n\n"
+log_info "Starting survey\n"
 
 php-fpm7 -F &
 exec nginx -g "daemon off;"
