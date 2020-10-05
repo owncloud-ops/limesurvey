@@ -1,15 +1,17 @@
---- token_bar.php.original	2020-07-24 10:35:43.540889910 +0200
-+++ token_bar.php	2020-07-24 11:16:22.740141644 +0200
-@@ -211,7 +211,7 @@
+diff --git a/application/views/admin/survey/topbar/token_bar.php b/application/views/admin/survey/topbar/token_bar.php
+index 922873c76f..fc905490ed 100644
+--- a/application/views/admin/survey/topbar/token_bar.php
++++ b/application/views/admin/survey/topbar/token_bar.php
+@@ -211,7 +211,7 @@ if (!$onlyclose) {
              $isDisabled = true;
          }
  
--        if (($oSurvey->bounceprocessing != 'N' || ($oSurvey->bounceprocessing == 'G' && getGlobalSetting('bounceaccounttype') != 'off'))) {
+-        if (!($oSurvey->bounceprocessing != 'N' || ($oSurvey->bounceprocessing == 'G' && getGlobalSetting('bounceaccounttype') != 'off'))) {
 +        if (($oSurvey->bounceprocessing == 'N' || ($oSurvey->bounceprocessing == 'G' && getGlobalSetting('bounceaccounttype') == 'off'))) {
              $errorMessages[] = gT("Bounce processing is deactivated either application-wide or for this survey in particular.");
              $isDisabled = true;
          }
-@@ -219,11 +219,10 @@
+@@ -219,11 +219,10 @@ if (!$onlyclose) {
          $errorMessage = join("\n", $errorMessages);
  
          $buttons['bounce_processing'] = [
@@ -22,7 +24,7 @@
              'name' => gT('Start bounce processing'),
              'class' => 'pjax ' . ($isDisabled ? ' disabled' : ' '),
          ];
-@@ -276,7 +275,7 @@
+@@ -276,7 +275,7 @@ if (!$onlyclose) {
  
      ###### Right aligned
  
