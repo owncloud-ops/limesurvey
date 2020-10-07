@@ -20,9 +20,9 @@ return array(
 
     ),
     'config'=>array(
-        'debug' => 0,
-        'debugsql' => 0,
-        {{- if (getenv "LIME_LDAP_QUERY_SERVER") }}
+        'debug' => {{ getenv "LIME_DEBUG" "0" }},
+        'debugsql' => {{ getenv "LIME_DEBUG_SQL" "0" }},
+        {{ if (getenv "LIME_LDAP_QUERY_SERVER") -}}
         'enableLdap'=>true,
         {{ end -}}
         'mysqlEngine' => 'MYISAM',
