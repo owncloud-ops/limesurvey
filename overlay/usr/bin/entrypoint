@@ -38,6 +38,7 @@ INSTALLER_FLAG=plugins/install.done
 if ! [ -f "$INSTALLER_FLAG" ]; then
     log_info "Install LimeSurvey"
     php /var/www/app/application/commands/console.php install "${LIME_ADMIN_USER}" "${LIME_ADMIN_PASSWORD}" "${LIME_ADMIN_USER}" "${LIME_ADMIN_EMAIL}" true
+    touch $INSTALLER_FLAG
     # shellcheck disable=SC2016
     php -r 'include("application/config/version.php"); echo $config["versionnumber"];' > $INSTALLER_FLAG
     echo $INSTALLER_FLAG >> $INSTALLER_FLAG
