@@ -1,18 +1,17 @@
 #!/usr/bin/env sh
-
+# shellcheck disable=SC2039
 set -eo pipefail
-
 source /usr/local/lib/log.sh
 
-/usr/local/bin/gomplate -V -o /etc/php7/php.ini -f /etc/templates/php.ini.tmpl
-/usr/local/bin/gomplate -V -o /var/www/app/application/config/config.php -f /etc/templates/config.php.tmpl
+/usr/local/bin/gomplate -o /etc/php7/php.ini -f /etc/templates/php.ini.tmpl
+/usr/local/bin/gomplate -o /var/www/app/application/config/config.php -f /etc/templates/config.php.tmpl
 
 if [ -f application/config/security.php ]; then
     log_info "File security.php already provisioned"
 else
     log_info "Creating security.php"
     if [ -n "$LIME_ENCRYPTION_KEYPAIR" ]; then
-        /usr/local/bin/gomplate -V -o /var/www/app/application/config/security.php -f /etc/templates/security.php.tmpl
+        /usr/local/bin/gomplate -o /var/www/app/application/config/security.php -f /etc/templates/security.php.tmpl
     else
         log_warn "No encryption keys was provided. A security.php config will be created by the application. THIS FILE NEEDS TO BE PERSISTENT"
     fi
@@ -39,8 +38,8 @@ INSTALLER_FLAG=plugins/install.done
 if ! [ -f "$INSTALLER_FLAG" ]; then
     log_info "Install LimeSurvey"
     php /var/www/app/application/commands/console.php install "${LIME_ADMIN_USER}" "${LIME_ADMIN_PASSWORD}" "${LIME_ADMIN_USER}" "${LIME_ADMIN_EMAIL}" true
-    touch $INSTALLER_FLAG
-    echo "$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')" > $INSTALLER_FLAG
+    # shellcheck disable=SC2016
+    php -r 'include("application/config/version.php"); echo $config["versionnumber"];' > $INSTALLER_FLAG
     echo $INSTALLER_FLAG >> $INSTALLER_FLAG
 else
     log_info "Install already performed at former container start"
@@ -50,6 +49,7 @@ fi
 # updatedb breaks if email.php has been templated in a former container start
 log_info "Perform database update check"
 VERSION_LATEST_INSTALL=$(tail -1 $INSTALLER_FLAG)
+# shellcheck disable=SC2016
 VERSION_NEW="$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')"
 if [ "$VERSION_LATEST_INSTALL" = "$VERSION_NEW" ]; then
     log_info "No database update needed"
@@ -65,10 +65,10 @@ fi
 # Since we check the versionnumber from the former install against the latest folder version, we can keep
 # the templating in here without condition as updatedb is only executed when the version changed and then it's working as expected
 log_info "Setup LimeSurvey email config"
-/usr/local/bin/gomplate -V -o /var/www/app/application/config/email.php -f /etc/templates/email.php.tmpl
+/usr/local/bin/gomplate -o /var/www/app/application/config/email.php -f /etc/templates/email.php.tmpl
 
 log_info "Setup LimeSurvey ldap config"
-/usr/local/bin/gomplate -V -o /var/www/app/application/config/ldap.php -f /etc/templates/ldap.php.tmpl
+/usr/local/bin/gomplate -o /var/www/app/application/config/ldap.php -f /etc/templates/ldap.php.tmpl
 
 log_info "Starting survey\n"
 
