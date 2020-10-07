@@ -1,3 +1,4 @@
+- BUGFIX
+  - fix broken upload
 - ENHANCEMENT
   - fix logging
-  - update upstream version
