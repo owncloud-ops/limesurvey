@@ -40,8 +40,9 @@ if ! [ -f "$INSTALLER_FLAG" ]; then
     php /var/www/app/application/commands/console.php install "${LIME_ADMIN_USER}" "${LIME_ADMIN_PASSWORD}" "${LIME_ADMIN_USER}" "${LIME_ADMIN_EMAIL}" true
     touch $INSTALLER_FLAG
     # shellcheck disable=SC2016
-    php -r 'include("application/config/version.php"); echo $config["versionnumber"];' > $INSTALLER_FLAG
-    echo $INSTALLER_FLAG >> $INSTALLER_FLAG
+    VERSION=$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')
+    echo "${VERSION}" > $INSTALLER_FLAG
+    echo "${VERSION}" >> $INSTALLER_FLAG
 else
     log_info "Install already performed at former container start"
 fi
