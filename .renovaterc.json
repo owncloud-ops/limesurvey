@@ -4,7 +4,7 @@
   "packageRules": [
     {
       "matchPackagePatterns": ["LimeSurvey/LimeSurvey"],
-      "versioning": "regex:^(?<major>\\d)\\.(?<minor>\\d)\\.(?<patch>\\d)\\+\\d*?$"
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\+\\d+?$"
     }
   ]
 }
