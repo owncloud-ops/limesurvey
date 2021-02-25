@@ -1,21 +1,24 @@
 FROM owncloudops/nginx:latest
 
-LABEL maintainer="ownCloud GmbH <devops@owncloud.com>" \
-    org.label-schema.name="Survey" \
-    org.label-schema.vendor="ownCloud GmbH" \
-    org.label-schema.schema-version="1.0"
+LABEL maintainer="ownCloud DevOps <devops@owncloud.com>"
+LABEL org.opencontainers.image.authors="ownCloud DevOps <devops@owncloud.com>"
+LABEL org.opencontainers.image.title="LimeSurvey"
+LABEL org.opencontainers.image.url="https://github.com/owncloud-ops/limesurvey"
+LABEL org.opencontainers.image.source="https://github.com/owncloud-ops/limesurvey"
+LABEL org.opencontainers.image.documentation="https://github.com/owncloud-ops/limesurvey"
 
 # Database migrations work for releases from 4.x.x on upwards. From 4.x.x to 5.x.x testing is neccesary!!!!
 # Migrations from 3.x.x to 4.x.x break the underlying yii framework.
-ARG BUILD_VERSION=4.3.18+200928
+ARG BUILD_VERSION
+
+# renovate: datasource=github-releases depName=LimeSurvey/LimeSurvey
 ENV SURVEY_VERSION="${BUILD_VERSION:-4.3.18+200928}"
 
-ENV SURVEY_ADMIN_USER=admin
 ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php-fpm7 php"
 
 ADD overlay/ /
 
-RUN apk --update add --virtual .build-deps tar curl composer && \
+RUN apk --update add --virtual .build-deps tar curl composer patch && \
     apk --update add php7 php7-curl php7-fpm php7-gd php7-intl php7-zip php7-xml php7-simplexml php7-xmlreader php7-xmlwriter \
     php7-dom php7-ctype php7-fileinfo php7-tokenizer php7-session php7-ldap php7-json php7-iconv php7-pdo_sqlite php7-pdo_mysql \
     php7-xsl php7-mbstring php7-imap php7-sodium gnu-libiconv && \
