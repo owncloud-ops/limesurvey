@@ -1,4 +1,4 @@
-FROM owncloudops/nginx:latest@sha256:29849a0beaf67dee91bcbbb579c1ffcf93196e1d80be0efcc069efc5070ad6c7
+FROM owncloudops/nginx:latest@sha256:a708a7321a2d3b7619a545239ce5b42f584dab3de6ae5d123444ba92f8b8827c
 
 LABEL maintainer="ownCloud DevOps <devops@owncloud.com>"
 LABEL org.opencontainers.image.authors="ownCloud DevOps <devops@owncloud.com>"
