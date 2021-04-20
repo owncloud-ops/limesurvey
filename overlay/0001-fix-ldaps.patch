@@ -1,6 +1,17 @@
---- ldap_helper.php.original	2020-07-22 21:15:39.886430791 +0200
-+++ ldap_helper.php	2020-07-22 21:21:33.571164022 +0200
-@@ -26,8 +26,13 @@
+From 2d12b01eb042e0c5714fe1717e6575e3cb021d84 Mon Sep 17 00:00:00 2001
+From: Robert Kaussow <mail@geeklabor.de>
+Date: Tue, 20 Apr 2021 10:25:46 +0200
+Subject: [PATCH] fix-ldaps
+
+---
+ application/helpers/ldap_helper.php | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/application/helpers/ldap_helper.php b/application/helpers/ldap_helper.php
+index bfccf0cb73..6a7f250631 100644
+--- a/application/helpers/ldap_helper.php
++++ b/application/helpers/ldap_helper.php
+@@ -27,8 +27,13 @@ function ldap_getCnx($server_id = null)
          return false;
      } else {
          $ds = false;
@@ -16,3 +27,6 @@
              ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
  
              if (!$ldap_server[$server_id]['referrals']) {
+-- 
+2.30.2
+

@@ -1,4 +1,4 @@
-FROM owncloudops/nginx:latest@sha256:29849a0beaf67dee91bcbbb579c1ffcf93196e1d80be0efcc069efc5070ad6c7
+FROM owncloudops/nginx:latest@sha256:a708a7321a2d3b7619a545239ce5b42f584dab3de6ae5d123444ba92f8b8827c
 
 LABEL maintainer="ownCloud DevOps <devops@owncloud.com>"
 LABEL org.opencontainers.image.authors="ownCloud DevOps <devops@owncloud.com>"
@@ -12,7 +12,7 @@ LABEL org.opencontainers.image.documentation="https://github.com/owncloud-ops/li
 ARG BUILD_VERSION
 
 # renovate: datasource=github-tags depName=LimeSurvey/LimeSurvey
-ENV SURVEY_VERSION="${BUILD_VERSION:-4.4.16+210406}"
+ENV SURVEY_VERSION="${BUILD_VERSION:-4.5.0+210412}"
 
 ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php-fpm7 php"
 
@@ -30,8 +30,7 @@ RUN apk --update add --virtual .build-deps tar curl composer patch && \
     curl -SsL "https://github.com/LimeSurvey/LimeSurvey/archive/${SURVEY_VERSION}.tar.gz" | \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
     curl -SsL -o /etc/php7/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
-    patch /var/www/app/application/helpers/ldap_helper.php /ldap_helper.patch && \
-    patch /var/www/app/application/views/admin/survey/topbar/token_bar.php /token_bar.patch && \
+    patch /var/www/app/application/helpers/ldap_helper.php /0001-fix-ldaps.patch && \
     mkdir -p /var/www/app/upload/surveys && \
     mkdir -p /var/www/app/uploadstruct && \
     cp -a /var/www/app/upload/* /var/www/app/uploadstruct && \
