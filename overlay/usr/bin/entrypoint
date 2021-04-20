@@ -33,7 +33,7 @@ fi
 # LimeSurvey isn't offering any good mechanism to catch the failing as there are side effects that influence the thrown exception.
 # Plugins is a persisted volume that we use for creating our custom "installation done" flag
 log_info "Setup LimeSurvey"
-log_info "Check if install has been performed already"
+log_info "Check if installation has been performed already"
 INSTALLER_FLAG=plugins/install.done
 if ! [ -f "$INSTALLER_FLAG" ]; then
     log_info "Install LimeSurvey"
@@ -56,7 +56,7 @@ VERSION_NEW="$(php -r 'include("application/config/version.php"); echo $config["
 if [ "$VERSION_LATEST_INSTALL" = "$VERSION_NEW" ]; then
     log_info "No database update needed"
 else
-    log_warn "Perform database update and see if version offset needs database migration"
+    log_warn "Perform database update and verify if version offset needs database migration"
     # Lime Devs told that it's sometimes neccesary to clean the runtime cache to run db migrations
     rm -r tmp/runtime/*
     php /var/www/app/application/commands/console.php updatedb
@@ -72,7 +72,7 @@ log_info "Setup LimeSurvey email config"
 log_info "Setup LimeSurvey ldap config"
 /usr/local/bin/gomplate -o /var/www/app/application/config/ldap.php -f /etc/templates/ldap.php.tmpl
 
-log_info "Starting survey\n"
+log_info "Start LimeSurvey\n"
 
 php-fpm7 -F &
 exec nginx -g "daemon off;"
