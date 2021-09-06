@@ -31,7 +31,6 @@ RUN apk --update add --virtual .build-deps tar curl composer patch && \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
     curl -SsL -o /etc/php7/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
     patch /var/www/app/application/helpers/ldap_helper.php /0001-fix-ldaps.patch && \
-    patch /var/www/app/application/core/plugins/AuthLDAP/AuthLDAP.php /e6775fc7d910e426a5b1f200f23d2e640e828477.patch && \
     mkdir -p /var/www/app/upload/surveys && \
     mkdir -p /var/www/app/uploadstruct && \
     cp -a /var/www/app/upload/* /var/www/app/uploadstruct && \
