@@ -1,9 +1,9 @@
 ---
 repository:
   name: limesurvey
-  description: Docker image for LimeSurvey.
+  description: Custom container image for LimeSurvey
   homepage: https://hub.docker.com/r/owncloudops/limesurvey
-  topics: docker, limesurvey
+  topics: oci, container, limesurvey
 
   private: false
   has_issues: true

@@ -3,7 +3,7 @@
 [![Build Status](https://drone.owncloud.com/api/badges/owncloud-ops/limesurvey/status.svg)](https://drone.owncloud.com/owncloud-ops/limesurvey)
 [![Docker Hub](https://img.shields.io/badge/docker-latest-blue.svg?logo=docker&logoColor=white)](https://hub.docker.com/r/owncloudops/limesurvey)
 
-Custom Docker image for [LimeSurvey](https://www.limesurvey.org/de/).
+Custom container image for [LimeSurvey](https://www.limesurvey.org/de/).
 
 ## Environment Variables
 
