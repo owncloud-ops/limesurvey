@@ -4,4 +4,10 @@ $config = array();
 $config['encryptionkeypair'] = '{{ getenv "LIME_ENCRYPTION_KEYPAIR" }}';
 $config['encryptionpublickey'] = '{{ getenv "LIME_ENCRYPTION_PUBLIC_KEY" }}';
 $config['encryptionsecretkey'] = '{{ getenv "LIME_ENCRYPTION_SECRET_KEY" }}';
+{{ if (getenv "LIME_ENCRYPTION_NONCE") -}}
+$config['encryptionnonce'] = '{{ getenv "LIME_ENCRYPTION_NONCE" }}';
+{{ end -}}
+{{ if (getenv "LIME_ENCRYPTION_SECRET_BOX_KEY") -}}
+$config['encryptionsecretboxkey'] = '{{ getenv "LIME_ENCRYPTION_SECRET_BOX_KEY" }}';
+{{ end -}}
 return $config;
