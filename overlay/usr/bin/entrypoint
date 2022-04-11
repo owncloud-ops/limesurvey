@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
-# shellcheck disable=SC2039
+
+# shellcheck disable=SC3040
 set -eo pipefail
+
+# shellcheck disable=SC3046,SC1091
 source /usr/local/lib/log.sh
 
 /usr/local/bin/gomplate -o /etc/php7/php.ini -f /etc/templates/php.ini.tmpl
@@ -19,8 +22,7 @@ fi
 
 log_info "Prepare LimeSurvey"
 
-if [ -n "$LIME_DB_HOST" ]
-then
+if [ -n "$LIME_DB_HOST" ]; then
     log_info "Wait for database server on '${LIME_DB_HOST}:${LIME_DB_PORT:-3306}'"
     /usr/local/bin/wait-for "${LIME_DB_HOST}":"${LIME_DB_PORT:-3306}"
 else
@@ -41,8 +43,8 @@ if ! [ -f "$INSTALLER_FLAG" ]; then
     touch $INSTALLER_FLAG
     # shellcheck disable=SC2016
     VERSION=$(php -r 'include("application/config/version.php"); echo $config["versionnumber"];')
-    echo "${VERSION}" > $INSTALLER_FLAG
-    echo "${VERSION}" >> $INSTALLER_FLAG
+    echo "${VERSION}" >$INSTALLER_FLAG
+    echo "${VERSION}" >>$INSTALLER_FLAG
 else
     log_info "Install already performed at former container start"
 fi
