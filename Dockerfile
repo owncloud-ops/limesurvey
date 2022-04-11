@@ -7,8 +7,6 @@ LABEL org.opencontainers.image.url="https://github.com/owncloud-ops/limesurvey"
 LABEL org.opencontainers.image.source="https://github.com/owncloud-ops/limesurvey"
 LABEL org.opencontainers.image.documentation="https://github.com/owncloud-ops/limesurvey"
 
-# Database migrations work for releases from 4.x.x on upwards. From 4.x.x to 5.x.x testing is neccesary!!!!
-# Migrations from 3.x.x to 4.x.x break the underlying yii framework.
 ARG BUILD_VERSION
 
 # renovate: datasource=github-tags depName=LimeSurvey/LimeSurvey
