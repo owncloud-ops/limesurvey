@@ -68,4 +68,4 @@ docker build --build-arg BUILD_VERSION=1.8 -f Dockerfile -t kimai2:latest .
 
 ## License
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](https://github.com/owncloud-ops/limesurvey/blob/master/LICENSE) file for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE](https://github.com/owncloud-ops/limesurvey/blob/main/LICENSE) file for details.
