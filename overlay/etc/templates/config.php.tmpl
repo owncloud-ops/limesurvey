@@ -2,10 +2,10 @@
 return array(
     'components' => array(
         'db' => array(
-            'connectionString' => 'mysql:host={{ getenv "LIME_DB_HOST" "localhost" }};port={{ getenv "LIME_DB_PORT" "3306" }};dbname={{ getenv "LIME_DB_NAME" "limesurvey" }};',
+            'connectionString' => 'mysql:host={{ getenv "LIME_DB_HOST" "mariadb" }};port={{ getenv "LIME_DB_PORT" "3306" }};dbname={{ getenv "LIME_DB_NAME" "limesurvey" }};',
             'emulatePrepare' => true,
-            'username' => '{{ getenv "LIME_DB_USERNAME" }}',
-            'password' => '{{ getenv "LIME_DB_PASSWORD" }}',
+            'username' => '{{ getenv "LIME_DB_USERNAME" "limesurvey" }}',
+            'password' => '{{ getenv "LIME_DB_PASSWORD" "limesurvey" }}',
             'charset' => '{{ getenv "LIME_DB_CHARSET" "utf8mb4" }}',
             'tablePrefix' => 'lime_',
         ),

@@ -22,13 +22,8 @@ fi
 
 log_info "Prepare LimeSurvey"
 
-if [ -n "$LIME_DB_HOST" ]; then
-    log_info "Wait for database server on '${LIME_DB_HOST}:${LIME_DB_PORT:-3306}'"
-    /usr/local/bin/wait-for "${LIME_DB_HOST}":"${LIME_DB_PORT:-3306}"
-else
-    log_warn "Required environment variable '\$LIME_DATABASE_HOST' not set. Exiting"
-    exit 1
-fi
+log_info "Wait for database server on '${LIME_DB_HOST:-mariadb}:${LIME_DB_PORT:-3306}'"
+/usr/local/bin/wait-for "${LIME_DB_HOST:-mariadb}":"${LIME_DB_PORT:-3306}"
 
 # Automated install of limesurvey is quite fragile and so we have to avoid that the install command is ever executed more than once.
 # If so, it will avoid the container from being restarted but also from being updated.
