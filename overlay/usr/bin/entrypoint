@@ -6,7 +6,7 @@ set -eo pipefail
 # shellcheck disable=SC3046,SC1091
 source /usr/local/lib/log.sh
 
-/usr/local/bin/gomplate -o /etc/php7/php.ini -f /etc/templates/php.ini.tmpl
+/usr/local/bin/gomplate -o /etc/php8/php.ini -f /etc/templates/php.ini.tmpl
 /usr/local/bin/gomplate -o /var/www/app/application/config/config.php -f /etc/templates/config.php.tmpl
 
 if [ -f application/config/security.php ]; then
@@ -76,5 +76,5 @@ log_info "Setup LimeSurvey ldap config"
 
 log_info "Start LimeSurvey\n"
 
-php-fpm7 -F &
+php-fpm8 -F &
 exec nginx -g "daemon off;"
