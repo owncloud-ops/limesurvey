@@ -5,18 +5,27 @@
 
 Custom container image for [LimeSurvey](https://www.limesurvey.org/de/).
 
+## Ports
+
+- 8080
+
+## Volumes
+
+- /var/www/app/upload
+- /var/www/app/plugins
+
 ## Environment Variables
 
 ```Shell
 LIME_ADMIN_USER=admin
-LIME_ADMIN_PASSWORD=****
+LIME_ADMIN_PASSWORD=
 LIME_ADMIN_NAME=Administrator
 LIME_ADMIN_EMAIL=your-email@example.com
 LIME_ADMIN_BOUNCE=your-email@example.com
 
 LIME_DB_USERNAME=limesurvey
-LIME_DB_PASSWORD=****
-LIME_DB_HOST=localhost
+LIME_DB_PASSWORD=limesurvey
+LIME_DB_HOST=mariadb
 LIME_DB_PORT=3306
 LIME_DB_NAME=limesurvey
 LIME_DB_CHARSET=utf8mb4
@@ -24,7 +33,7 @@ LIME_DB_CHARSET=utf8mb4
 LIME_MAILER_URL=mx.example.com
 LIME_MAILER_PORT=465
 LIME_MAILER_USER=sender
-LIME_MAILER_PASSWORD=****
+LIME_MAILER_PASSWORD=
 LIME_MAILER_ENCRYPTION=ssl
 LIME_MAILER_PROTOCOL=smtp
 
