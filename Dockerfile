@@ -25,9 +25,9 @@ RUN apk --update add --virtual .build-deps tar curl composer patch && \
     mkdir -p /var/www/app/ && \
     SURVEY_VERSION="${SURVEY_VERSION##v}" && \
     echo "Installing limesurvey version '${SURVEY_VERSION}' ..." && \
-    curl -SsL "https://github.com/LimeSurvey/LimeSurvey/archive/${SURVEY_VERSION}.tar.gz" | \
+    curl -SsfL "https://github.com/LimeSurvey/LimeSurvey/archive/${SURVEY_VERSION}.tar.gz" | \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
-    curl -SsL -o /etc/php8/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
+    curl -SsfL -o /etc/php8/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
     patch /var/www/app/application/helpers/ldap_helper.php /0001-fix-ldaps.patch && \
     mkdir -p /var/www/app/upload/surveys && \
     mkdir -p /var/www/app/uploadstruct && \
