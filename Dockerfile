@@ -19,7 +19,7 @@ ADD overlay/ /
 RUN apk --update add --virtual .build-deps tar curl composer patch && \
     apk --update add php8 php8-curl php8-fpm php8-gd php8-intl php8-zip php8-xml php8-simplexml php8-xmlreader php8-xmlwriter \
     php8-dom php8-ctype php8-fileinfo php8-tokenizer php8-session php8-ldap php8-json php8-iconv php8-pdo_sqlite php8-pdo_mysql \
-    php8-xsl php8-mbstring php8-imap php8-sodium gnu-libiconv && \
+    php8-xsl php8-mbstring php8-imap php8-sodium php8-pecl-imagick gnu-libiconv imagemagick && \
     rm -rf /var/www/localhost && \
     rm -f /etc/php8/php-fpm.d/www.conf && \
     mkdir -p /var/www/app/ && \
