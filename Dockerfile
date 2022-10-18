@@ -10,7 +10,7 @@ LABEL org.opencontainers.image.documentation="https://github.com/owncloud-ops/li
 ARG BUILD_VERSION
 
 # renovate: datasource=github-tags depName=LimeSurvey/LimeSurvey
-ENV SURVEY_VERSION="${BUILD_VERSION:-5.4.4+221004}"
+ENV SURVEY_VERSION="${BUILD_VERSION:-5.4.5+221010}"
 
 ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php-fpm8 php"
 
