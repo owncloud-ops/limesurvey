@@ -12,22 +12,22 @@ ARG BUILD_VERSION
 # renovate: datasource=github-tags depName=LimeSurvey/LimeSurvey
 ENV SURVEY_VERSION="${BUILD_VERSION:-5.4.11+221114}"
 
-ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php-fpm8 php"
+ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php-fpm81 php"
 
 ADD overlay/ /
 
 RUN apk --update add --virtual .build-deps tar curl composer patch && \
-    apk --update add php8 php8-curl php8-fpm php8-gd php8-intl php8-zip php8-xml php8-simplexml php8-xmlreader php8-xmlwriter \
-    php8-dom php8-ctype php8-fileinfo php8-tokenizer php8-session php8-ldap php8-json php8-iconv php8-pdo_sqlite php8-pdo_mysql \
-    php8-xsl php8-mbstring php8-imap php8-sodium php8-pecl-imagick gnu-libiconv imagemagick && \
+    apk --update add php81 php81-curl php81-fpm php81-gd php81-intl php81-zip php81-xml php81-simplexml php81-xmlreader php81-xmlwriter \
+    php81-dom php81-ctype php81-fileinfo php81-tokenizer php81-session php81-ldap php81-json php81-iconv php81-pdo_sqlite php81-pdo_mysql \
+    php81-xsl php81-mbstring php81-imap php81-sodium php81-pecl-imagick gnu-libiconv imagemagick && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php8/php-fpm.d/www.conf && \
+    rm -f /etc/php81/php-fpm.d/www.conf && \
     mkdir -p /var/www/app/ && \
     SURVEY_VERSION="${SURVEY_VERSION##v}" && \
     echo "Installing limesurvey version '${SURVEY_VERSION}' ..." && \
     curl -SsfL "https://github.com/LimeSurvey/LimeSurvey/archive/${SURVEY_VERSION}.tar.gz" | \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
-    curl -SsfL -o /etc/php8/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
+    curl -SsfL -o /etc/php81/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
     patch /var/www/app/application/helpers/ldap_helper.php /0001-fix-ldaps.patch && \
     mkdir -p /var/www/app/upload/surveys && \
     mkdir -p /var/www/app/uploadstruct && \
@@ -42,7 +42,7 @@ RUN apk --update add --virtual .build-deps tar curl composer patch && \
     mkdir -p /var/lib/php/soap_cache && \
     mkdir -p /var/lib/php/session && \
     chown -R nginx /var/lib/php && \
-    chown nginx /etc/php8/php.ini && \
+    chown nginx /etc/php81/php.ini && \
     chown -R nginx:nginx /var/www/app
 
 VOLUME /var/www/app/upload
