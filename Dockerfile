@@ -1,4 +1,4 @@
-FROM quay.io/owncloudops/nginx:latest@sha256:112c95058a38f146e3aa60992786eb3048d8f6159e9e57bac46d5b694f98384e
+FROM quay.io/owncloudops/nginx:latest@sha256:ae2b52a6f2daaf4d26b0cc723bdd7a10fd0cb726d198c3eeeeb51ec8b7cf23c1
 
 LABEL maintainer="ownCloud DevOps <devops@owncloud.com>"
 LABEL org.opencontainers.image.authors="ownCloud DevOps <devops@owncloud.com>"
