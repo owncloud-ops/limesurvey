@@ -12,22 +12,22 @@ ARG BUILD_VERSION
 # renovate: datasource=github-tags depName=LimeSurvey/LimeSurvey
 ENV SURVEY_VERSION="${BUILD_VERSION:-6.3.8+231204}"
 
-ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php-fpm81 php"
+ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php-fpm82 php"
 
 ADD overlay/ /
 
 RUN apk --update add --virtual .build-deps tar curl composer patch && \
-    apk --update add php81 php81-curl php81-fpm php81-gd php81-intl php81-zip php81-xml php81-simplexml php81-xmlreader php81-xmlwriter \
-    php81-dom php81-ctype php81-fileinfo php81-tokenizer php81-session php81-ldap php81-json php81-iconv php81-pdo_sqlite php81-pdo_mysql \
-    php81-xsl php81-mbstring php81-imap php81-sodium php81-pecl-imagick gnu-libiconv imagemagick && \
+    apk --update add php82 php82-curl php82-fpm php82-gd php82-intl php82-zip php82-xml php82-simplexml php82-xmlreader php82-xmlwriter \
+    php82-dom php82-ctype php82-fileinfo php82-tokenizer php82-session php82-ldap php82-json php82-iconv php82-pdo_sqlite php82-pdo_mysql \
+    php82-xsl php82-mbstring php82-imap php82-sodium php82-pecl-imagick gnu-libiconv imagemagick && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php81/php-fpm.d/www.conf && \
+    rm -f /etc/php82/php-fpm.d/www.conf && \
     mkdir -p /var/www/app/ && \
     SURVEY_VERSION="${SURVEY_VERSION##v}" && \
     echo "Installing limesurvey version '${SURVEY_VERSION}' ..." && \
     curl -SsfL "https://github.com/LimeSurvey/LimeSurvey/archive/${SURVEY_VERSION}.tar.gz" | \
         tar xz -C /var/www/app/ -X /.tarignore --strip-components=1 && \
-    curl -SsfL -o /etc/php81/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
+    curl -SsfL -o /etc/php82/browscap.ini https://browscap.org/stream?q=Lite_PHP_BrowsCapINI && \
     patch /var/www/app/application/helpers/ldap_helper.php /0001-fix-ldaps.patch && \
     mkdir -p /var/www/app/upload/surveys && \
     mkdir -p /var/www/app/uploadstruct && \
@@ -42,8 +42,9 @@ RUN apk --update add --virtual .build-deps tar curl composer patch && \
     mkdir -p /var/lib/php/soap_cache && \
     mkdir -p /var/lib/php/session && \
     chown -R nginx /var/lib/php && \
-    chown nginx /etc/php81/php.ini && \
-    chown -R nginx:nginx /var/www/app
+    chown nginx /etc/php82/php.ini && \
+    chown -R nginx:nginx /var/www/app && \
+    [ -f /usr/bin/php ] || ln -s /usr/bin/php /usr/bin/php82
 
 VOLUME /var/www/app/upload
 VOLUME /var/www/app/plugins
