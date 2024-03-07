@@ -73,7 +73,7 @@ LIME_DEBUG_SQL=0
 You could use the `BUILD_VERSION` to specify the target version.
 
 ```Shell
-docker build --build-arg BUILD_VERSION=1.8 -f Dockerfile -t kimai2:latest .
+docker build -f Dockerfile -t limesurvey:latest .
 ```
 
 ## License
